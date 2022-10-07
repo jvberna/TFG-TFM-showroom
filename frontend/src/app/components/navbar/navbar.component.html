@@ -1,0 +1,48 @@
+<nav class="navbar navbar-expand-lg navbar-transparent  navbar-absolute bg-primary fixed-top navtop">
+    <div class="container-fluid">
+        <div class="navbar-wrapper">
+            <div class="navbar-toggle">
+                <button type="button" class="navbar-toggler" (click)="sidebarToggle()">
+                    <span class="navbar-toggler-bar bar1"></span>
+                    <span class="navbar-toggler-bar bar2"></span>
+                    <span class="navbar-toggler-bar bar3"></span>
+                </button>
+            </div>
+            <a class="navbar-brand">{{getTitle()}}</a>
+        </div>
+        <button class="navbar-toggler" type="button" (click)="collapse()" [attr.aria-expanded]="!isCollapsed" aria-controls="collapseExample">
+          <span class="navbar-toggler-bar navbar-kebab"></span>
+          <span class="navbar-toggler-bar navbar-kebab"></span>
+          <span class="navbar-toggler-bar navbar-kebab"></span>
+        </button>
+        <div class="collapse navbar-collapse justify-content-end" id="collapseExample" [ngbCollapse]="isCollapsed">
+            <!-- <form>
+                <div class="input-group no-border">
+                    <input type="text" value="" class="form-control" placeholder="Search...">
+                    <div class="input-group-append">
+                        <div class="input-group-text">
+                            <i class="now-ui-icons ui-1_zoom-bold"></i>
+                        </div>
+                    </div>
+                </div>
+            </form> -->
+            <ul class="navbar-nav">
+                <li class="nav-item" ngbDropdown>
+                    <a class="nav-link" id="dropdownBasic1" ngbDropdownToggle>
+                        <i class="now-ui-icons users_single-02"></i>
+                        <p>
+                            <span class="d-lg-none d-md-block">Acciones</span>
+                        </p>
+                    </a>
+                    <div class="dropdown-menu dropdown-menu-right" ngbDropdownMenu aria-labelledby="dropdownBasic1">
+                        <a *ngIf="rol=='ROL_ADMIN'" class="dropdown-item" href="admin/perfil">Mi perfil</a>
+                        <a *ngIf="rol=='ROL_ALUMNO'" class="dropdown-item" href="alumno/perfil">Mi perfil</a>
+                        <a *ngIf="rol=='ROL_EDITOR'" class="dropdown-item" href="editor/perfil">Mi perfil</a>
+                        <a *ngIf="rol=='ROL_EMPRESA'" class="dropdown-item" href="empresa/perfil">Mi perfil</a>
+                        <a class="dropdown-item micursor" (click)="logout()"><i class="fa fa-power-off m-r-5 m-l-5"></i> Logout</a>
+                    </div>
+                </li>
+            </ul>
+        </div>
+    </div>
+</nav>

@@ -1,0 +1,40 @@
+.subidas {
+    margin-left: .2em;
+}
+
+.archivo {
+    margin: 1em;
+}
+
+.contenido:first-child {
+    margin-top: 2em;
+}
+
+.contenido>input {
+    margin: .2em;
+}
+
+.segundafila {
+    margin-top: 5em;
+}
+
+.primerafila {
+    margin-bottom: 1em;
+}
+
+.main-content {
+    /* margen con el header */
+    margin-top: 2em;
+}
+
+.i1 {
+    margin-right: .5em;
+}
+
+.i2 {
+    margin-left: .5em;
+}
+
+.mini {
+    width: 1em;
+}

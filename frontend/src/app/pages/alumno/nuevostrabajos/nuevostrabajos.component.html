@@ -1,0 +1,102 @@
+<div class="panel-header panel-header-sm">
+
+</div>
+
+<div class="main-content">
+    <div class="row primerafila">
+        <div class="col-md-4 input-group no-border">
+            <input #txtQuery (keyup)="cargarTrabajos(txtQuery.value)" class="form-control" autocomplete="off" placeholder="Busca...">
+            <div class="input-group-append">
+                <div class="input-group-text">
+                    <i class="now-ui-icons ui-1_zoom-bold"></i>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-6"></div>
+    </div>
+    <div class="row">
+        <div class="col-md-12">
+            <div class="card">
+                <div class="card-header">
+                    <h4 class="card-title"> Trabajos</h4>
+                </div>
+                <div class="card-body">
+                    <div class="alert alert-primary text-center" *ngIf="loading">
+                        <h4 class="alert-heading">Cargando!</h4>
+                        <i class="fa fa-spin fa-spinner fa-3x"></i>
+                        <p>Por favor, espere</p>
+                    </div>
+                    <div class="table-responsive">
+                        <table class="table">
+                            <thead class=" text-primary">
+                                <th class="col-md-5">
+                                    Título
+                                </th>
+                                <th class="col-md-3">
+                                    Titulación
+                                </th>
+                                <th class="col-md-2">
+                                    Estado
+                                </th>
+                                <th class="col-md-2">
+                                    Acción
+                                </th>
+                            </thead>
+                            <tbody>
+                                <tr *ngFor="let trabajo of listaTrabajos">
+                                    <td class="col-md-5">{{trabajo.titulo}}</td>
+                                    <td class="col-md-3">{{trabajo.titulacion.nombre}}</td>
+                                    <td class="col-md-2" *ngIf="trabajo.estado=='Para editar'" (click)="subirTrabajo(trabajo.uid)" class="micursor text-warning">{{trabajo.estado}}</td>
+                                    <td class="col-md-2" *ngIf="trabajo.estado=='Pendiente de revisión'" (click)="subirTrabajo(trabajo.uid)" class="micursor text-primary">{{trabajo.estado}}</td>
+                                    <td class="col-md-2" *ngIf="trabajo.estado=='Denegado'" (click)="subirTrabajo(trabajo.uid)" class="micursor text-danger">{{trabajo.estado}}</td>
+                                    <td class="col-md-2">
+                                        <i class="fa fa-pencil-alt text-success fa-lg mr-5 micursor" (click)="subirTrabajo(trabajo.uid)"></i>
+                                        <i class="fas fa-upload fa-lg mr-5 micursor" (click)="subirContenidos(trabajo.uid)"></i>
+                                        <i class="fas fa-info-circle" data-toggle="modal" data-target="#modalFeed" (click)="clickFeedback(trabajo)"></i>
+                                    </td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                    <div class="mt-2 mr-2 float-right">
+                        <app-pagination (cambiarPagina)="cambiarPagina( $event ) " [texto]="true " [totalRegistros]="totaltrabajos" [registroActual]="posicionactual+1 " [registrosPorPagina]="registrosporpagina "></app-pagination>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+<!-- Modal feedback trabajo -->
+<div class="modal fade" id="modalFeed" *ngIf="!loadingfeed">
+    <div class="modal-dialog modal-dialog-centered">
+        <div class="modal-content">
+            <!-- Modal Header -->
+            <div class="modal-header">
+                <div class="modal-title">
+                    <!-- <img class="img-fluid " src="../../assets/images/logocolor.png "> -->
+                    <h4 class="modal-title w-100 font-weight-bold">FEEDBACKS</h4>
+                </div>
+            </div>
+            <!-- Modal body -->
+            <div class="modal-body">
+                <swiper [config]="config">
+                    <ng-template swiperSlide *ngFor="let feedback of trabajofeed.feedback; let i=index">
+                        <div class="mx-auto">
+                            <div class="numfeed text-center">
+                                <strong>Feedback &nbsp; {{i+1}}</strong>
+                            </div>
+                            <div class="desfeed mx-auto" style="overflow: auto;">
+                                {{feedback}}
+                            </div>
+                        </div>
+                    </ng-template>
+                </swiper>
+            </div>
+            <div class="p-t-10">
+                <button class="btn btn--pill btn--signin" data-dismiss="modal" type="close" data-target="#">Cerrar</button>
+            </div>
+        </div>
+    </div>
+</div>

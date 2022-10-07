@@ -1,0 +1,116 @@
+.divimgmini {
+    height: 230px;
+    overflow: hidden;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.imagencont {
+    max-width: 100%;
+    height: auto;
+}
+
+.divtitulomini {
+    background-color: rgba(240, 248, 255, 0.767);
+    border-radius: 10px;
+    border: solid 2px aliceblue;
+    z-index: 99999;
+    height: 50px;
+    width: 100%;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    text-align: center;
+    padding-left: 0.4em;
+    padding-right: 0.4em;
+    vertical-align: middle;
+    padding-top: 0.4em;
+}
+
+.contenedorresultados {
+    /* text-align: center; */
+    font-size: 18px;
+    /* background: #fff; */
+    /* Center slide text vertically */
+    /*display: -webkit-box;
+    display: -ms-flexbox;
+    display: -webkit-flex;
+    display: flex;
+     -webkit-box-pack: center;
+    -ms-flex-pack: center;
+    -webkit-justify-content: center;
+    justify-content: center;
+    -webkit-box-align: center;
+    -ms-flex-align: center;
+    -webkit-align-items: center;
+    align-items: center; */
+    height: 300px;
+    border-radius: 20px;
+    border: solid 2px rgba(240, 248, 255, 0.767);
+}
+
+.boxres {
+    width: 32%;
+}
+
+.rowres {
+    margin-left: 2% !important;
+    margin-right: 2% !important;
+    /* flexbox style */
+    display: flex;
+    flex-direction: row;
+    justify-content: row;
+    flex-flow: wrap;
+}
+
+@media (min-width: 991px) {
+    .seccionescab {
+        display: inline !important;
+    }
+}
+
+
+/* Responsive media querys */
+
+@media (max-width:1363px) {
+    .boxres {
+        width: 48%;
+    }
+}
+
+@media (max-width:940px) {
+    .rowres {
+        margin-left: 3% !important;
+        margin-right: 3% !important;
+    }
+}
+
+@media (max-width:900px) {
+    .rowres {
+        margin-left: 2% !important;
+        margin-right: 2% !important;
+    }
+}
+
+@media (max-width:882px) {
+    .rowres {
+        margin-left: 1% !important;
+        margin-right: 1% !important;
+    }
+}
+
+@media (max-width:863px) {
+    .rowres {
+        margin-left: 2px !important;
+        margin-right: 2px !important;
+    }
+}
+
+@media (max-width:852px) {
+    .boxres {
+        width: 94%;
+        margin-left: auto !important;
+        margin-right: auto !important;
+    }
+}

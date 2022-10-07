@@ -1,0 +1,66 @@
+<div class="panel-header panel-header-sm">
+
+</div>
+
+<div class="main-content">
+    <div class="row primerafila">
+        <div class="col-md-4 input-group no-border">
+            <input #txtQuery (keyup)="cargarUsuarios(txtQuery.value)" class="form-control" autocomplete="off" placeholder="Busca...">
+            <div class="input-group-append">
+                <div class="input-group-text">
+                    <i class="now-ui-icons ui-1_zoom-bold"></i>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-6"></div>
+        <div class="col-md-2 float-right"><button class="btn btn-primary btn-block float-right" routerLink="/admin/nuevousu">Nuevo usuario</button></div>
+    </div>
+    <div class="row">
+        <div class="col-md-12">
+            <div class="card">
+                <div class="card-header">
+                    <h4 class="card-title"> Usuarios</h4>
+                </div>
+                <div class="card-body">
+                    <div class="alert alert-primary text-center" *ngIf="loading">
+                        <h4 class="alert-heading">Cargando!</h4>
+                        <i class="fa fa-spin fa-spinner fa-3x"></i>
+                        <p>Por favor, espere</p>
+                    </div>
+                    <div class="table-responsive">
+                        <table class="table">
+                            <thead class=" text-primary">
+                                <th>
+                                    Nombre
+                                </th>
+                                <th>
+                                    Email
+                                </th>
+                                <th>
+                                    Rol
+                                </th>
+                                <th class="text-right">
+                                    Acción
+                                </th>
+                            </thead>
+                            <tbody>
+                                <tr *ngFor="let usuario of listaUsuarios">
+                                    <td class="micursor">{{usuario.nombre_apellidos}}</td>
+                                    <td>{{usuario.email}}</td>
+                                    <td>{{usuario.rol}}</td>
+                                    <td class="text-right micursor">
+                                        <i class="fa fa-pencil-alt text-success fa-lg mr-5 micursor" [routerLink]="['/admin/actualizarusuario', usuario.uid]"></i>
+                                        <i class="fa fa-trash text-danger fa-lg micursor" (click)="eliminarUsuario(usuario.uid, usuario.nombre_apellidos)"></i>
+                                    </td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                    <div class="mt-2 mr-2 float-right">
+                        <app-pagination (cambiarPagina)="cambiarPagina( $event ) " [texto]="true " [totalRegistros]="totalusuarios" [registroActual]="posicionactual+1 " [registrosPorPagina]="registrosporpagina "></app-pagination>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

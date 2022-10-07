@@ -1,0 +1,67 @@
+/* MODAL */
+
+@import url('https://fonts.googleapis.com/css?family=Poppins&display=swap');
+body {
+    background-color: rgb(58, 177, 2);
+    font-family: Poppins
+}
+
+@media(width:1024px) {
+    .modal-dialog {
+        max-width: 70%
+    }
+}
+
+.modal-content {
+    border-radius: 0.7rem
+}
+
+.modal-header img {
+    width: 100px
+}
+
+.modal-title {
+    margin-left: auto;
+    margin-right: auto
+}
+
+.modal-header {
+    border-bottom: none;
+    padding-bottom: 0;
+    padding-top: 4vh
+}
+
+.modal-footer {
+    border-top: none
+}
+
+.title {
+    font-size: 17px;
+    color: grey
+}
+
+@media(min-height:768px)and(min-width:411px) {
+    .title {
+        font-size: 20px;
+        color: grey
+    }
+}
+
+modal-body>div>input {
+    outline: none;
+    margin: 0;
+    border: none;
+    -webkit-box-shadow: none;
+    -moz-box-shadow: none;
+    box-shadow: none;
+    width: 100%;
+    font-size: 15px;
+    font-family: inherit
+}
+
+
+/* GENERAL */
+
+form>div {
+    margin: 1em;
+}

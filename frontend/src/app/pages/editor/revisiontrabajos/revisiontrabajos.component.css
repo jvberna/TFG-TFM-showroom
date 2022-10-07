@@ -1,0 +1,8 @@
+.primerafila {
+    margin-top: 3em;
+}
+
+.botones {
+    display: flex;
+    flex-direction: inline;
+}

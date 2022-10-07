@@ -1,0 +1,71 @@
+<div class="panel-header panel-header-sm">
+</div>
+<div class="main-content">
+    <div class="animate__animated animate__fadeInRight animate__faster">
+        <div class="d-flex justify-content-center">
+            <div class="card col-md-10">
+                <div class="card-body">
+                    <div>
+                        <button class="btn btn-info m-r-10" [disabled]="!datosForm.pristine" routerLink="/admin/usuarios">Volver</button>
+                    </div>
+                    <form class="form-horizontal m-t-20" [formGroup]="datosForm" (ngSubmit)="enviar()">
+                        <div class="row m-t-10">
+                            <div class="col-lg-3 col-md-12 text-lg-right">
+                                <span class="">Nombre y apellidos</span>
+                            </div>
+                            <div class="col-lg-3 col-md-12">
+                                <input type="text" class="form-control" formControlName="nombre_apellidos" [ngClass]="{'is-invalid' : campoNoValido('nombre_apellidos')}" id="nombre_apellidos">
+                                <div class="invalid-feedback">
+                                    El campo es obligatorio
+                                </div>
+                            </div>
+                        </div>
+                        <div class=" row m-t-10 ">
+                            <div class="col-lg-3 col-md-12 text-lg-right ">
+                                <span class=" ">Email</span>
+                            </div>
+                            <div class="col-lg-3 col-md-12 ">
+                                <input type="email " class="form-control " formControlName="email" [ngClass]="{ 'is-invalid' : campoNoValido( 'email')} " id="email ">
+                                <div class="invalid-feedback ">
+                                    El campo es obligatorio
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row m-t-10">
+                            <div class="col-lg-3 col-md-12 text-lg-right">
+                                <span class="">Password</span>
+                            </div>
+                            <div class="col-lg-2 col-md-12">
+                                <input type="text" class="form-control" formControlName="password" [ngClass]="{'is-invalid' : campoNoValido('password')}" id="password">
+                                <div class="invalid-feedback">
+                                    El campo es obligatorio
+                                </div>
+                            </div>
+                            <div class="rol">
+                                <span class=" ">Rol</span>
+                            </div>
+                            <div class="col-lg-3 col-md-12 ">
+                                <select class="select2 form-control custom-select" formControlName="rol" [ngClass]="{'is-invalid' : campoNoValido('rol')}" style="width: 100%; height:36px;" id="rol">
+                                <option value="ROL_ADMIN">Administrador / Administradora</option>
+                                <option value="ROL_ALUMNO" selected>Alumno / Alumna</option>
+                                <option value="ROL_EMPRESA">Empresa</option>
+                                <option value="ROL_EDITOR">Editor / Editora</option>
+                                <option value="ROL_TUTOR">Tutor / Tutora</option>
+                              </select>
+                                <div class="invalid-feedback">
+                                    El campo es obligatorio
+                                </div>
+                            </div>
+                        </div>
+                        <div class="d-flex justify-content-center m-t-10 ">
+                            <div class="align-content-center ">
+                                <button class="btn btn-primary m-r-20 " type="submit " id="enviar" [disabled]="datosForm.pristine">Enviar</button>
+                                <button class="btn btn-danger " type="button" (click)="cancelar()" id="cancelar" [disabled]="datosForm.pristine">Cancelar</button>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

@@ -1,0 +1,119 @@
+<div class="container-fluid todo">
+    <!-- Primera fila info general -->
+    <div class="row pt-4" *ngIf="!loading">
+        <div class="col-md-12">
+            <!-- Row para titulo-->
+            <div class="row rowtitulo">
+                <h2>{{trabajo.titulo}}</h2>
+            </div>
+            <div class="row nombre">
+                <div class="solonombre">
+                    <strong>{{trabajo.autor.nombre_apellidos}}</strong> &nbsp; <a [href]="'mailto:'+trabajo.autor.email">{{trabajo.autor.email}}</a>
+                    <share-buttons theme="circles-dark" [include]="['copy', 'facebook', 'email', 'linkedin', 'telegram', 'twitter', 'whatsapp']" [showIcon]="true" [showText]="false" [url]="rutatrabajo" [description]="trabajo.titulo" class="sharebotones"> </share-buttons>
+                </div>
+                <!-- <div class="valoracion">Valoración: &nbsp; {{trabajo.valoracion}} <i class="fas fa-thumbs-up"></i></div> -->
+                <!-- <div class="g-signin2" data-onsuccess="onSignIn">Login google</div> -->
+                <!-- <div class="col-md-8">
+
+              </div>
+              <div class="col-md-4">{{trabajo.autor.valoracion}} likes</div> -->
+            </div>
+        </div>
+        <div class="row rowficha">
+            <!-- Row para descripcion -->
+            <div class="descripcion letrasmall" style="overflow: auto;">{{trabajo.resumen}}</div>
+            <!-- Row para detalles -->
+            <div class="detalles">
+                <div class="row rowdet letrasmall">
+                    <p><strong>Área: </strong> &nbsp; {{trabajo.area}}</p>
+                </div>
+                <div class="row rowdet letrasmall">
+                    <p><strong>Carrera: </strong> &nbsp; <a target="_blank " [href]="titulacionenlace">{{trabajo.titulacion.nombre}}</a></p>
+                </div>
+                <div class="row rowdet letrasmall">
+                    <p><strong>Tutor: </strong> &nbsp; {{trabajo.director}}</p>
+                </div>
+                <div class="row rowdet letrasmall">
+                    <p><strong>Enlace defensa: </strong> &nbsp; <a target="_blank " [href]="trabajo.enlace">{{trabajo.enlace}}</a></p>
+                </div>
+                <div class="row rowdet letrasmall">
+                    <p><strong>Fecha defensa: </strong> &nbsp; {{trabajo.defensa}}</p>
+                </div>
+                <div class="row rowdet letrasmall">
+                    <p><strong>Curso académico: </strong> &nbsp; {{trabajo.curso}}</p>
+                </div>
+                <div class="row rowdet letrasmall">
+                    <div class="pclave"><strong>Palabras clave: &nbsp; </strong>
+                        <div class="clave">{{trabajo.palabrasclave}}</div>
+                    </div>
+                </div>
+            </div>
+            <!-- Tercera columna Imagen-->
+            <div class="imagen">
+                <!-- Row para la imagen -->
+                <!-- <div class="row rowportada"> -->
+                <img class="micursor portadatrabajo" [src]="crearImagenUrl(trabajo)" alt="portada">
+                <!-- </div> -->
+
+            </div>
+        </div>
+
+    </div>
+</div>
+<!-- Contenidos multimedia y extras -->
+<div class="row pl-4 pr-4 contenidos" *ngIf="!loading">
+    <h2 class="mx-auto">Contenidos multimedia</h2>
+    <ng-container *ngIf="trabajo.contenidos.length>0;else noconts"></ng-container>
+    <ng-container *ngIf="trabajo.contenidos.length>0">
+        <swiper [config]="config" class="swipercont">
+            <ng-template *ngFor="let contenido of trabajo.contenidos; let i=index" class="swiper-slidecont card" swiperSlide>
+                <ng-container *ngIf="contenido.tipo=='jpg' || contenido.tipo=='jpeg' || contenido.tipo=='png' || contenido.tipo=='PNG' || contenido.tipo=='YT' || contenido.tipo=='mp3' || contenido.tipo=='wav';else otroformato"></ng-container>
+                <ng-container *ngIf="contenido.tipo=='jpg' || contenido.tipo=='jpeg' || contenido.tipo=='png' || contenido.tipo=='PNG'">
+                    <div class="contenedorimg">
+                        <a [href]='crearContenidosUrl(contenido.contenido)' target="_blank"><img class="imagencont swiper-slidecont" [src]="crearContenidosUrl(contenido.contenido)" [alt]="contenido.nombre" /></a>
+                        <div class="row nomdesfoto">
+                            <div class="row nomfoto mx-auto pt-1 pl-1 pr-1"><strong>{{contenido.nombre}}</strong></div>
+                            <div class="row desfoto mx-auto pb-1 pl-1 pr-1">{{contenido.descripcion}}</div>
+                        </div>
+                    </div>
+                </ng-container>
+                <ng-container *ngIf=" contenido.tipo=='YT' ">
+                    <iframe class="swiper-slidecont" [src]="getVideoIframe(contenido.contenido) " [title]="contenido.nombre " frameborder="0 " allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture " allowfullscreen></iframe>
+                </ng-container>
+                <ng-container *ngIf="contenido.tipo=='mp3' || contenido.tipo=='wav' ">
+                    <div class="otroformato pb-4 pt-4 mr-2 ml-2 pr-4 pl-4 ">
+                        <div class="row tipo ">
+                            <h5>{{contenido.nombre}} &nbsp; ({{contenido.tipo}})</h5>
+                        </div>
+                        <hr size="1px " color="black " />
+                        <div class="row des pt-2 pb-2 ">{{contenido.descripcion}}</div>
+                        <hr size="1px " color="black " />
+                        <div class="row downl "><audio [src]="crearContenidosUrl(contenido.contenido) " controls [alt]="contenido.nombre "></audio></div>
+                    </div>
+                </ng-container>
+                <ng-template #otroformato>
+                    <div class="otroformato ">
+                        <div class="row tipo ">
+                            <h5>{{contenido.nombre}}</h5>
+                        </div>
+                        <hr size="1px " color="black " />
+                        <div class="row des pt-2 pb-2 ">{{contenido.descripcion}}</div>
+                        <hr size="1px " color="black " />
+                        <div class="row downl ">
+                            <div>
+                                <button type="button" class="btn btn-success">Descargar<a [download]="contenido.nombre " [href]="crearContenidosUrl(contenido.contenido) "></a></button></div>
+                            <div>
+                                ({{contenido.tipo}})
+                            </div>
+                        </div>
+                    </div>
+                </ng-template>
+            </ng-template>
+        </swiper>
+    </ng-container>
+    <ng-template #noconts>
+        <div class="row noconts mx-auto ">
+            <h6 class="nocontsesc">No hay contenidos multimedia asociados</h6>
+        </div>
+    </ng-template>
+</div>

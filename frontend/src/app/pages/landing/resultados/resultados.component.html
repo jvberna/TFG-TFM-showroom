@@ -1,0 +1,15 @@
+<div class="container-fluid">
+    <div class="row">
+        <h2 class="mx-auto pt-2">Resultados para <strong>{{texto}}</strong></h2>
+    </div>
+    <div class="row rowres justify-content-left">
+        <ng-container *ngFor="let trabajo of listaTrabajos">
+            <div class="boxres ml-2 mr-2 contenedorresultados mb-4">
+                <div class="divimgmini">
+                    <img (click)="irFicha(trabajo.uid)" class="micursor imagencont" [src]="crearImagenUrl(trabajo)" alt="portada">
+                </div>
+                <div class="divtitulomini"><strong>{{trabajo.titulo}}</strong></div>
+            </div>
+        </ng-container>
+    </div>
+</div>

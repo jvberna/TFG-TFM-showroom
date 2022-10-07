@@ -1,0 +1,78 @@
+<div class="panel-header panel-header-sm">
+</div>
+<div class="main-content">
+    <div class="animate__animated animate__fadeInRight animate__faster">
+        <div class="card col-md-10">
+            <div class="card-body">
+                <div class="row primerafila">
+                    <div class="col-md-10">
+                        <h3>Añade el contenido para subir</h3>
+                    </div>
+                    <div class="col-md-2 float-right"><button class="btn btn-info float-right" routerLink="/admin/trabajos">Volver</button></div>
+                </div>
+
+                <div class="row">
+                    <div class="col-md-10">
+                        <div *ngFor="let contenido of contenidos; let i=index" class="card archivo col-md-3 text-center justify-content-center">
+                            <form class="contenido text-center">
+                                <ng-container *ngIf="contenido.tipo!='YT'">
+                                    <input type="text" name="nombre" id="{{'nombre'+i}}" class="form-control" placeholder="Introduce título">
+                                    <input type="text" name="descripcion" id="{{'descripcion'+i}}" class="form-control input-lg" placeholder="Introduce descripción">
+                                </ng-container>
+                                <ng-container *ngIf="contenido.tipo=='YT'">
+                                    <input type="text" name="descripcion" id="{{'descripcion'+i}}" class="form-control input-lg">
+                                </ng-container>
+                                <input type="text" disabled name="tipo" id="tipo" class="form-control text-center" value={{contenido.tipo}}>
+                                <i class="i1 fas fa-plus micursor" (click)="addDatosContenido(i)"></i>
+                                <i class="i2 fas fa-window-close micursor" (click)="quitarDatosContenido(i)"></i>
+                            </form>
+                        </div>
+                    </div>
+                    <div class="col-md-2 flex">
+                        <div class="row input-group no-border">
+                            <input type="file" class="custom-file-input form-control" id="fotoperfil" (change)="cambioContenido( $event )">
+                            <label class="custom-file-label" for="fotoperfil" data-browse="+" style="background-color: #dedede4d; border-radius: 20px;">Añadir contenido</label>
+                        </div>
+                        <div class="row input-group no-border">
+                            <input type="text" class="form-control" id="urlyt" placeholder="Añadir video YT">
+                            <div class="input-group-append">
+                                <div class="input-group-text">
+                                    <i class="fas fa-plus micursor" (click)="cambioVideo()"></i>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="card col-md-10 segundafila">
+            <div class="card-body">
+                <!-- Segunda fila donde estarán los archivo subidos del trabajo en la BD -->
+                <div class="row">
+                    <div class="col-md-10">
+                        <h3>Contenidos subidos</h3>
+                        <div *ngFor="let contenido of contenidossubidos; let i=index" class="card archivo col-md-3 text-center justify-content-center">
+                            <form class="contenido text-center">
+                                <ng-container *ngIf="contenido.tipo!='YT'">
+                                    <input type="text" name="nombre2" id="{{'nombre2'+i}}" class="form-control" placeholder="Introduce título" value={{contenido.nombre}}>
+                                    <input type="text" name="descripcion2" id="{{'descripcion2'+i}}" class="form-control input-lg" placeholder="Introduce descripción" value={{contenido.descripcion}}>
+                                </ng-container>
+                                <ng-container *ngIf="contenido.tipo=='YT'">
+                                    <input type="text" disabled name="descripcion2" id="{{'descripcion2'+i}}" class="form-control input-lg" value={{contenido.descripcion}}>
+                                </ng-container>
+                                <input type="text" disabled name="tipo" id="tipo" class="form-control text-center" value={{contenido.tipo}}>
+                                <ng-container *ngIf="contenido.tipo!='YT'">
+                                    <i class="i1 fas fa-redo micursor" (click)="addDatosContenidoAct(i)"></i>
+                                    <i class="i2 fas fa-window-close micursor" (click)="borrarContenido(i)"></i>
+                                </ng-container>
+                                <ng-container *ngIf="contenido.tipo=='YT'">
+                                    <i class="i2 fas fa-window-close micursor" (click)="borrarContenido(i)"></i>
+                                </ng-container>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

@@ -1,0 +1,243 @@
+<div class="panel-header panel-header-sm">
+</div>
+<div class="main-content">
+    <div class="animate__animated animate__fadeInRight animate__faster">
+        <div class="d-flex justify-content-center">
+            <div class="card col-md-10">
+                <div class="card-body">
+                    <div class="alert alert-primary text-center" *ngIf="loading">
+                        <h4 class="alert-heading">Cargando!</h4>
+                        <i class="fa fa-spin fa-spinner fa-3x"></i>
+                        <p>Por favor, espere</p>
+                    </div>
+                    <div>
+                        <button class="btn btn-info m-r-10" [disabled]="!datosForm.pristine" routerLink="/alumno/nuevostrabajos">Volver</button>
+                    </div>
+                    <div *ngIf="imagenUrl!=''" class="text-center imperfil" style="width: 200px;">
+                        <img [src]="imagenUrl" class="img-thumbnail rounded-circle" width="200">
+                    </div>
+                    <form class="form-horizontal m-t-20" [formGroup]="datosForm" (ngSubmit)="enviar()">
+                        <div class="row m-t-10">
+                            <div class="col-lg-3 col-md-12 text-lg-right">
+                                <span class="">Título</span>
+                            </div>
+                            <div class="col-lg-6 col-md-12">
+                                <input type="text" class="form-control" formControlName="titulo" id="titulo">
+                            </div>
+                        </div>
+                        <div class="row m-t-10">
+                            <div class="col-lg-3 col-md-12 text-lg-right">
+                                <span class="">Autor</span>
+                            </div>
+                            <div class="col-lg-3 col-md-12">
+                                <input type="text" class="form-control" formControlName="autor" id="autor">
+                            </div>
+                        </div>
+                        <div class="row m-t-10">
+                            <div class="col-lg-3 col-md-12 text-lg-right">
+                                <span class="">Titulación</span>
+                            </div>
+                            <div class="col-lg-5 col-md-12">
+                                <input type="text" class="form-control" formControlName="titulacion" id="titulacion">
+                            </div>
+                        </div>
+                        <div class="row m-t-10">
+                            <div class="col-lg-3 col-md-12 text-lg-right">
+                                <span class="">Area</span>
+                            </div>
+                            <div class="col-lg-6 col-md-12">
+                                <input type="text" class="form-control" formControlName="area" id="area">
+                            </div>
+                        </div>
+                        <div class="row m-t-10">
+                            <div class="col-lg-3 col-md-12 text-lg-right">
+                                <span class="">Tipo</span>
+                            </div>
+                            <div class="col-lg-2 col-md-12">
+                                <input type="text" class="form-control" formControlName="tipo" id="tipo">
+                            </div>
+                        </div>
+                        <!-- Campos que debe introducir el alumno -->
+                        <div class="row m-t-10">
+                            <div class="col-lg-3 col-md-12 text-lg-right">
+                                <span class="">Tutor</span>
+                            </div>
+                            <div class="col-lg-3 col-md-12">
+                                <input type="text" class="form-control" formControlName="director" [ngClass]="{'is-invalid' : campoNoValido('director')}" id="director">
+                                <div class="invalid-feedback">
+                                    El campo es obligatorio
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row m-t-10">
+                            <div class="col-lg-3 col-md-12 text-lg-right">
+                                <span class="">Enlace defensa</span>
+                            </div>
+                            <div class="col-lg-3 col-md-12">
+                                <input type="text" class="form-control" formControlName="enlace" [ngClass]="{'is-invalid' : campoNoValido('enlace')}" id="enlace">
+                                <div class="invalid-feedback">
+                                    El campo es obligatorio
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row m-t-10">
+                            <div class="col-lg-3 col-md-12 text-lg-right">
+                                <span class="">Fecha defensa</span>
+                            </div>
+                            <div class="col-lg-3 col-md-12">
+                                <input type="text" class="form-control" formControlName="defensa" [ngClass]="{'is-invalid' : campoNoValido('defensa')}" id="defensa">
+                                <small class="form-text text-muted">Formato: "7-9-2022"</small>
+                                <div class="invalid-feedback">
+                                    El campo es obligatorio
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row m-t-10">
+                            <div class="col-lg-3 col-md-12 text-lg-right">
+                                <span class="">Curso académico</span>
+                            </div>
+                            <div class="col-lg-2 col-md-12">
+                                <input type="text" class="form-control" formControlName="curso" [ngClass]="{'is-invalid' : campoNoValido('curso')}" id="curso">
+                                <small class="form-text text-muted">Formato: "2021-2022"</small>
+                                <div class="invalid-feedback">
+                                    El campo es obligatorio
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row m-t-10">
+                            <div class="col-lg-3 col-md-12 text-lg-right">
+                                <span class="">Palabras clave</span>
+                            </div>
+                            <div class="col-lg-5 col-md-12">
+                                <input type="text" class="form-control" formControlName="palabrasclave" [ngClass]="{'is-invalid' : campoNoValido('palabrasclave')}" id="palabrasclave">
+                                <small class="form-text text-muted">Formato: "palabra clave | palabra clave"</small>
+                                <div class="invalid-feedback">
+                                    El campo es obligatorio
+                                </div>
+                            </div>
+                        </div>
+                        <div class=" row m-t-10 ">
+                            <div class="col-lg-3 col-md-12 text-lg-right ">
+                                <span class=" ">Resumen</span>
+                            </div>
+                            <div class="col-lg-8 col-md-12 ">
+                                <textarea class="form-control" formControlName="resumen" [ngClass]="{'is-invalid' : campoNoValido('resumen')}" id="resumen" rows="4"></textarea>
+                                <div class="invalid-feedback ">
+                                    El campo es obligatorio
+                                </div>
+                            </div>
+                        </div>
+                        <div class="form-group row m-t-10">
+                            <div class="col-lg-3 text-lg-right">
+                                <span class=" ">Imagen trabajo</span>
+                            </div>
+                            <div class="col-lg-8 col-md-12">
+                                <div class="custom-file">
+                                    <input type="file" class="custom-file-input" formControlName="imagen" id="fotoperfil" (change)="cambioImagen( $event )">
+                                    <label class="custom-file-label" for="fotoperfil" data-browse="Elegir">{{fileText}}</label>
+                                </div>
+                            </div>
+                        </div>
+                        <!-- Aquí todo el contenido multimedia que quiera agregar el alumno -->
+                        <!-- <h3>Contenido multimedia adicional</h3>
+                        <div class="form-group row m-t-10">
+                            <div class="col-lg-3 text-lg-right">
+                                <span class=" ">Imágenes</span>
+                            </div>
+                            <div class="col-lg-8 col-md-12">
+                                <div class="custom-file">
+                                    <input type="file" class="custom-file-input" id="imagenes" (change)="cambioImagenes( $event )">
+                                    <label class="custom-file-label" for="imagenes" data-browse="Elegir">Seleccione imágenes</label>
+                                </div>
+                            </div>
+                            <div class="col-lg-3 text-lg-right"></div>
+                            <div class="col-lg-8 col-md-12">
+                                <ul class="list-group mt-2 porencima" *ngIf="imagenes.length>0">
+                                    <li *ngFor="let imagen of nomimagenes; let i=index" class="list-group-item list-group-item-action micursor">
+                                        <div class="row">
+                                            <h6 class="col-md-10" id={{i}}>{{ imagen }}</h6>
+                                            <i class="col-md-2 fa fa-times text-danger text-right" (click)="quitarImagen(i)"></i>
+                                        </div>
+                                    </li>
+                                </ul>
+                            </div>
+
+                        </div>
+                        <div class="form-group row m-t-10">
+                            <div class="col-lg-3 text-lg-right">
+                                <span class=" ">Vídeos</span>
+                            </div>
+                            <div class="col-lg-8 col-md-12">
+                                <div class="custom-file">
+                                    <input type="file" class="custom-file-input" id="videos" (change)="cambioVideos( $event )">
+                                    <label class="custom-file-label" for="videos" data-browse="Elegir">Seleccione vídeos</label>
+                                </div>
+                            </div>
+                            <div class="col-lg-3 text-lg-right"></div>
+                            <div class="col-lg-8 col-md-12">
+                                <ul class="list-group mt-2 porencima" *ngIf="videos.length>0">
+                                    <li *ngFor="let video of nomvideos; let i=index" class="list-group-item list-group-item-action micursor">
+                                        <div class="row">
+                                            <h6 class="col-md-10" id={{i}}>{{ video }}</h6>
+                                            <i class="col-md-2 fa fa-times text-danger text-right" (click)="quitarVideo(i)"></i>
+                                        </div>
+                                    </li>
+                                </ul>
+                            </div>
+                        </div>
+                        <div class="form-group row m-t-10">
+                            <div class="col-lg-3 text-lg-right">
+                                <span class=" ">Audios</span>
+                            </div>
+                            <div class="col-lg-8 col-md-12">
+                                <div class="custom-file">
+                                    <input type="file" class="custom-file-input" id="audios" (change)="cambioAudios( $event )">
+                                    <label class="custom-file-label" for="audios" data-browse="Elegir">Seleccione audios</label>
+                                </div>
+                            </div>
+                            <div class="col-lg-3 text-lg-right"></div>
+                            <div class="col-lg-8 col-md-12">
+                                <ul class="list-group mt-2 porencima" *ngIf="audios.length>0">
+                                    <li *ngFor="let audio of nomaudios; let i=index" class="list-group-item list-group-item-action micursor">
+                                        <div class="row">
+                                            <h6 class="col-md-10" id={{i}}>{{ audio }}</h6>
+                                            <i class="col-md-2 fa fa-times text-danger text-right" (click)="quitarAudio(i)"></i>
+                                        </div>
+                                    </li>
+                                </ul>
+                            </div>
+                        </div>
+                        <div class="form-group row m-t-10">
+                            <div class="col-lg-3 text-lg-right">
+                                <span class=" ">Documentos</span>
+                            </div>
+                            <div class="col-lg-8 col-md-12">
+                                <div class="custom-file">
+                                    <input type="file" class="custom-file-input" id="documentos" (change)="cambioDocumentos( $event )">
+                                    <label class="custom-file-label" for="documentos" data-browse="Elegir">Seleccione documentos</label>
+                                </div>
+                            </div>
+                            <div class="col-lg-3 text-lg-right"></div>
+                            <div class="col-lg-8 col-md-12">
+                                <ul class="list-group mt-2 porencima" *ngIf="documentos.length>0">
+                                    <li *ngFor="let documento of nomdocumentos; let i=index" class="list-group-item list-group-item-action micursor">
+                                        <div class="row">
+                                            <h6 class="col-md-10" id={{i}}>{{ documento }}</h6>
+                                            <i class="col-md-2 fa fa-times text-danger text-right" (click)="quitarAudio(i)"></i>
+                                        </div>
+                                    </li>
+                                </ul>
+                            </div>
+                        </div> -->
+                        <div class="d-flex justify-content-center m-t-10 ">
+                            <div class="align-content-center ">
+                                <button class="btn btn-primary m-r-20 " type="submit " id="enviar" [disabled]="datosForm.pristine">Enviar</button>
+                                <button class="btn btn-danger " type="button" (click)="cancelar()" id="cancelar" [disabled]="datosForm.pristine">Cancelar</button>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

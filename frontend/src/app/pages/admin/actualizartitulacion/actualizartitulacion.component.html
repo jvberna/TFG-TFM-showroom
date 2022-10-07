@@ -1,0 +1,104 @@
+<div class="panel-header panel-header-sm">
+</div>
+<div class="main-content">
+    <div class="animate__animated animate__fadeInRight animate__faster">
+        <div class="d-flex justify-content-center">
+            <div class="card col-md-10">
+                <div class="card-body">
+                    <div>
+                        <button class="btn btn-info m-r-10" [disabled]="!datosForm.pristine" routerLink="/admin/titulaciones">Volver</button>
+                    </div>
+                    <div class="text-center imperfil" style="width: 200px;">
+                        <img [src]="imagenUrl" class="img-thumbnail rounded-circle" width="200">
+                    </div>
+                    <form class="form-horizontal m-t-20" [formGroup]="datosForm" (ngSubmit)="enviar()">
+                        <div class="row m-t-10">
+                            <div class="col-lg-3 col-md-12 text-lg-right">
+                                <span class="">Nombre</span>
+                            </div>
+                            <div class="col-lg-5 col-md-12">
+                                <input type="text" class="form-control" formControlName="nombre" [ngClass]="{'is-invalid' : campoNoValido('nombre')}" id="nombre">
+                                <div class="invalid-feedback">
+                                    El campo es obligatorio
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row m-t-10">
+                            <div class="col-lg-3 col-md-12 text-lg-right">
+                                <span class="">Abreviatura</span>
+                            </div>
+                            <div class="col-lg-3 col-md-12">
+                                <input type="text" class="form-control" formControlName="abreviatura" [ngClass]="{'is-invalid' : campoNoValido('abreviatura')}" id="abreviatura">
+                                <div class="invalid-feedback">
+                                    El campo es obligatorio
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row m-t-10">
+                            <div class="col-lg-3 col-md-12 text-lg-right">
+                                <span class="">Tipo</span>
+                            </div>
+                            <div class="col-lg-2 col-md-12">
+                                <select (change)="salida($event.target.value)" class="form-control" formControlName="tipo" [ngClass]="{'is-invalid' : campoNoValido('tipo')}" id="tipo">
+                                  <option *ngFor="let tip of Tipos" [ngValue]="tip">{{tip}} </option>
+                              </select>
+                                <div class="invalid-feedback">
+                                    El campo es obligatorio
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row m-t-10">
+                            <div class="col-lg-3 col-md-12 text-lg-right">
+                                <span class="">Área</span>
+                            </div>
+                            <div class="col-lg-4 col-md-12">
+                                <div *ngIf="tipo=='Grado'">
+                                    <select class="form-control" formControlName="area" [ngClass]="{'is-invalid' : campoNoValido('area')}" id="area">
+                                      <option [value]="item" *ngFor="let item of ListaGrados">{{item}}</option>
+                                  </select>
+                                </div>
+                                <div *ngIf="tipo=='Máster'">
+                                    <select class="form-control" formControlName="area" [ngClass]="{'is-invalid' : campoNoValido('area')}" id="area">
+                                    <option [value]="item" *ngFor="let item of ListaMasters">{{item}}</option>
+                                </select>
+                                </div>
+                                <div class="invalid-feedback">
+                                    El campo es obligatorio
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class=" row m-t-20 ">
+                            <div class="col-lg-3 col-md-12 text-lg-right ">
+                                <span class=" ">Resumen</span>
+                            </div>
+                            <div class="col-lg-8 col-md-12 ">
+                                <input type="text " class="form-control " formControlName="resumen" [ngClass]="{ 'is-invalid' : campoNoValido( 'resumen')} " id="resumen ">
+                                <div class="invalid-feedback ">
+                                    El campo es obligatorio
+                                </div>
+                            </div>
+                        </div>
+                        <div class="form-group row m-t-10">
+                            <div class="col-lg-3 text-lg-right">
+                                <span class=" ">Imagen</span>
+                            </div>
+                            <div class="col-lg-8 col-md-12">
+                                <div class="custom-file">
+                                    <input type="file" class="custom-file-input" formControlName="imagen" id="fotoperfil" (change)="cambioImagen( $event )">
+                                    <label class="custom-file-label" for="fotoperfil" data-browse="Elegir">{{fileText}}</label>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="d-flex justify-content-center m-t-10 ">
+                            <div class="align-content-center ">
+                                <button class="btn btn-primary m-r-20 " type="submit " id="enviar" [disabled]="datosForm.pristine">Enviar</button>
+                                <button class="btn btn-danger " type="button" (click)="cancelar()" id="cancelar" [disabled]="datosForm.pristine">Cancelar</button>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

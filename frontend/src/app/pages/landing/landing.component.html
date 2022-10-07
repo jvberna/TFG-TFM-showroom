@@ -1,0 +1,113 @@
+<div *ngIf="!loading" class="bodylanding">
+    <!-- HEADER -->
+    <div class="barrasuperior justify-content-center mx-auto">
+        <div class="sup1">
+            <a class="navbar-brand brandarriba" href="https://www.ua.es/">
+                <img src="./assets/img/UA (color).png" width="190" height="40" class="d-inline-block align-top img-fluid" alt="Logo" />
+            </a>
+        </div>
+        <div class="sup2">
+            <strong>PLATAFORMA DE VISUALIZACIÓN DE TRABAJOS FINALES DE LA EPS</strong>
+        </div>
+        <div class="sup3">
+            <a class="navbar-brand brandarriba" href="https://eps.ua.es/es/">
+                <img src="./assets/img/epslogo.png" width="80" height="20" class="d-inline-block align-top img-fluid" alt="Logo" />
+            </a>
+        </div>
+    </div>
+    <nav class="navbar navbar-expand-lg">
+        <div class="container-fluid all-show">
+            <a class="navbar-brand brandbajo" href="#">
+                <img class="rounded mx-auto d-block" src="https://web.ua.es/es/gabinete-imagen/cabecera.png" alt="logo Gabinete de Imagen" height="50" width="50">
+            </a>
+            <div class="sup22">
+                <strong>PLATAFORMA DE VISUALIZACIÓN DE TRABAJOS FINALES DE LA EPS</strong>
+            </div>
+            <button type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation" class="navbar-toggler navbar-toggler-right"><i class="fa fa-bars"></i></button>
+
+            <div id="navbarSupportedContent" class="collapse navbar-collapse">
+                <ul class="col-md-1 navbar-nav">
+                    <li class="nav-item"><a href="#" class="nav-link text-uppercase font-weight-bold seccionescab">Inicio</a></li>
+                    <li class="nav-item">
+                        <a *ngIf="listatitu" (click)="cambiotitu()" class="nav-link dropdown-toggle text-uppercase font-weight-bold micursor seccionescab" aria-haspopup="true" aria-expanded="false">Titulaciones</a>
+                        <a *ngIf="!listatitu" (click)="cambiotitu()" class="nav-link dropdown-toggle text-uppercase font-weight-bold micursor seccionescab" aria-haspopup="true" aria-expanded="true">Titulaciones</a>
+                    </li>
+                </ul>
+                <ul class="col-md-4 navbar-nav buscadornav">
+                    <form class="input-group no-border buscadorfondo">
+                        <input id="txtQuery" [txtQuery]="texto" (submit)="busqueda()" class="form-control buscadorfondo" autocomplete="off " placeholder="Busca por trabajo o titulación ">
+                        <div class="input-group-append buscadorfondo">
+                            <div class="input-group-text buscadorfondo">
+                                <i (click)="busqueda()" class="micursor now-ui-icons ui-1_zoom-bold"></i>
+                            </div>
+                        </div>
+                    </form>
+                </ul>
+                <!-- Para centrar el buscador, desaparece al hacer pequeña la pantalla -->
+                <!-- <ul class="col-md-1 navbar-nav espaciocol"></ul> -->
+                <ul class="col-md-1 navbar-nav">
+                    <li class="nav-item dropdown usuario">
+                        <a class="nav-link dropdown-toggle" href="" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                            <i class="now-ui-icons users_single-02"></i></a>
+                        <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+                            <a class="dropdown-item micursor justify-content-sm-center" data-toggle="modal" data-target="#modalLogin"><strong>Login</strong></a>
+                            <!-- <a *ngIf="rol!=''" class="dropdown-item" routerLink="/cliente/perfil"><i class="fa fa-address-card m-r-5 m-l-5"></i> Mi Perfil</a>
+                            <div *ngIf="rol!=''" class="dropdown-divider"></div>
+                            <a *ngIf="rol!=''" class="dropdown-item micursor" (click)="logout()"><i class="fa fa-power-off m-r-5 m-l-5"></i> Logout</a> -->
+                        </div>
+                    </li>
+                </ul>
+
+            </div>
+        </div>
+    </nav>
+
+    <!-- Se despliega cuando listatitu esta a false -->
+    <div class="row desplegabletitu justify-content-center" [ngClass]="{ 'display': listatitu}">
+        <!-- <div class="col-md-2 divtitu" *ngFor="let titulacion of listaTitulaciones">
+            <a target="_blank" [href]="titulacion.resumen"><img [src]="crearUrlTitulacion(titulacion.imagen)" alt="titulacion" class="img-thumbnail rounded-circle" width="50" height="50"></a>
+            <div class="nombretitu"><strong>{{titulacion.nombre}}</strong></div>
+        </div> -->
+        <!-- Grados -->
+        <div class="titus grados" [ngClass]="{ 'display': listatitu}">
+            <h4 class="mx-auto text-center titulotitu"><strong>GRADOS</strong></h4>
+            <div class="row coltitus">
+                <ng-container *ngFor="let titulacion of listaTitulaciones">
+                    <div class="col-md-1 divtitu" style="width: 14.25%;
+                    flex: 0 0 14.25%;max-width: 14.25%;" *ngIf="titulacion.tipo=='Grado'">
+                        <img [src]="crearUrlTitulacion(titulacion.imagen)" (click)="busquedatitu(titulacion)" [alt]="titulacion.nombre" class="img-thumbnail rounded-circle micursor">
+                        <div class="nombretitu">{{titulacion.abreviatura}}</div>
+                    </div>
+                </ng-container>
+            </div>
+        </div>
+        <!-- Másters -->
+        <div class="titus masters" [ngClass]="{ 'display': listatitu}">
+            <h4 class="mx-auto text-center titulotitu"><strong>MÁSTERS</strong></h4>
+            <div class="row coltitus">
+                <ng-container *ngFor="let titulacion of listaTitulaciones">
+                    <div class="col-md-1 divtitu" style="width: 14.25%;
+                    flex: 0 0 14.25%;max-width: 14.25%;" *ngIf="titulacion.tipo=='Máster'">
+                        <img [src]="crearUrlTitulacion(titulacion.imagen)" (click)="busquedatitu(titulacion)" [alt]="titulacion.nombre" class="img-thumbnail rounded-circle micursor" width="100" height="100">
+                        <div class="nombretitu">{{titulacion.abreviatura}}</div>
+                    </div>
+                </ng-container>
+            </div>
+        </div>
+    </div>
+
+    <router-outlet></router-outlet>
+
+
+    <!-- Modal Login -->
+    <div class="container ">
+        <app-login2></app-login2>
+    </div>
+</div>
+<footer class="footer text-center mx-auto">
+    <div class="container-fluid">
+        <div class="copyright">
+            &copy; {{test | date: 'yyyy'}}, Designed and coded by Javier Martín Gómez.
+        </div>
+    </div>
+</footer>
